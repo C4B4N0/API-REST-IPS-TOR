@@ -1,24 +1,44 @@
 version: '3.1'
 
 services:
-    postgresql:
-        image: postgres
-        restart: always
-        ports:
-            - 5432:5432
-        environment:
-            POSTGRES_PASSWORD: ${PG_PASS}
-            POSTGRES_USER: ${PG_USER}
-            POSTGRES_DB: ${PG_DB}
-        volumes:
-            - /var/cache/pgdata:/var/lib/postgresql/data
+  postgresql:
+    image: postgres
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: ${PG_PASS}
+      POSTGRES_USER: ${PG_USER}
+      POSTGRES_DB: ${PG_DB}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
 
-    pgadmin:
-        image: dpage/pgadmin4
-        environment:
-            PGADMIN_DEFAULT_EMAIL: "admin@gmail.com"
-            PGADMIN_DEFAULT_PASSWORD: "admin"
-        ports:
-            - 5050:80
-        depends_on:
-            - postgresql
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "admin@gmail.com"
+      PGADMIN_DEFAULT_PASSWORD: "admin"
+    ports:
+      - 5050:80
+    depends_on:
+      - postgresql
+
+  fastapi-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - 8000:8000
+    environment:
+      PG_USER: ${PG_USER}
+      PG_PASS: ${PG_PASS}
+      PG_DB: ${PG_DB}
+      PG_HOST: postgresql
+    depends_on:
+      - postgresql
+    volumes:
+      - .:/app
+
+volumes:
+  pgdata:
