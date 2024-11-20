@@ -10,11 +10,16 @@ Este projeto tem por objetivo resolver o desafio proposto pelo Mercado Libre, qu
 
 ### Como executar
 
+Copiar arquivo de env
+
+```
+cp .env.sample .env
+```
 
 Inicie a aplicação e suas dependências
 
 ``` 
-docker compose up -d
+docker compose up --build -d
 ```
 
 Instalação inicial do banco de dados:
