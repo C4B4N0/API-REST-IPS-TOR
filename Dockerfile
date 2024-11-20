@@ -1,5 +1,8 @@
 FROM python:3.10-slim AS build
 
+RUN useradd -u app
+USER app
+
 WORKDIR /app
 
 COPY requirements.txt requirements.txt
