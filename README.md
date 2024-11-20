@@ -7,38 +7,18 @@ Este projeto tem por objetivo resolver o desafio proposto pelo Mercado Libre, qu
 ### Dependências:
 - Docker
 - Docker-compose
-- Python 3.9+
-- Pipenv
-- FastAPI
-- uvicorn
-- asyncpg
-- aiohttp
-- requests
 
 ### Como executar
 
-Adicione o caminho do projeto na variável PYTHONPATH no arquivo ***.env***
 
-Inicie o banco de dados postgres e o pgadmin:
-
-``` 
-sudo docker-compose up -d
-```
-
-Inicie o ambiente:
-
-```
-pipenv shell
-```
-
-Instalar as dependências usando o comando:
+Inicie a aplicação e suas dependências
 
 ``` 
-pipenv install
+docker compose up -d
 ```
 
-Inicie a aplicação:
+Instalação inicial do banco de dados:
 
 ```
-unicorn main:app --port 8080
+docker compose run app python -m database.init_db
 ```
