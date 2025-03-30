@@ -1,6 +1,6 @@
 # DESAFIO - API REST - TOR
 
-Este projeto tem por objetivo desenvolver uma API REST que permita obter endereços IPs de redes TOR.
+Este projeto tem por objetivo desenvolver uma API REST que obtêm endereços IPs de redes TOR.
 
 ## FastAPI, PostgresQL, SQLAlchemy, Async Requests
 
